@@ -1,0 +1,71 @@
+# Equirectangular model for RICOH THETA S
+
+
+System:
+  map_format: "msgpack"					# default "msgpack"
+  min_num_shared_lms: 100				# default 100
+
+
+Camera:
+  name: "RICOH THETA X"
+  setup: "monocular"
+  model: "equirectangular"
+
+  fps: 30.0
+  cols: 3840
+  rows: 1920
+
+  color_order: "RGB"					# Gray RGB BGR
+
+
+Feature:
+  name: "default ORB feature extraction setting"
+  scale_factor: 1.15					# default 1.2
+  num_levels: 8						# default 8
+  ini_fast_threshold: 20				# default 20
+  min_fast_threshold: 7					# default 7
+
+
+Preprocessing:
+  min_size: 800						# default 800
+  depthmap_factor: 1.0					# default 1.0
+  mask_rectangles:					# [min_x, max_x, min_y, max_y]
+#    - [0.0, 1.0, 0.9, 1.0]
+#    - [0.0, 0.2, 0.0, 1.0]
+#    - [0.9, 1.0, 0.0, 1.0]
+
+Mapping:
+  backend: "g2o"
+  baseline_dist_thr_ratio: 0.02				# default 0.02
+  redundant_obs_ratio_thr: 0.95				# default 0.9
+  num_covisibilities_for_landmark_generation: 20	# default 10
+  num_covisibilities_for_landmark_fusion: 20		# default 10
+
+Tracking:
+  backend: "g2o"
+
+	
+Relocalizer: 
+  bow_match_lowe_ratio: 0.75				# default 0.75
+  proj_match_lowe_ratio: 0.9				# default 0.9
+  robust_match_lowe_ratio: 0.8				# default 0.8
+  min_num_bow_matches: 10				# default 20
+  min_num_valid_obs: 30					# default 50
+  use_fixed_seed: false					# default false
+  search_neighbor: true					# default true
+  top_n_covisibilities_to_search: 10			# default 10
+  num_common_words_thr_ratio: 0.8			# default 0.8
+  max_num_ransac_iter: 30				# default 30
+  max_num_local_keyfrms: 60				# default 60
+
+
+
+LoopDetector:
+  backend: "g2o"
+  enabled: true
+  min_distance_on_graph: 80	 				# default 50
+  reject_by_graph_distance: true			# default false
+
+
+Initializer:
+  use_fixed_seed: true					# default false
